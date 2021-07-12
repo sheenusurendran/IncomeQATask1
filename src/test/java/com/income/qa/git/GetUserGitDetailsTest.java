@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Order;
 import Utilities.SaveJsonResponse;
 import Utilities.SetupResource;
 
-public class GetUserGitDetails {
+public class GetUserGitDetailsTest {
 
     private static String response;
     private static String gitUserName = SetupResource.getUserName();

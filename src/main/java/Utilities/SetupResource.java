@@ -12,8 +12,7 @@ public class SetupResource {
     public static String getUserName() {
         System.out.println("Enter your git username:");
         Scanner input = new Scanner(System.in);
-        String username = input.nextLine();
-        return username;
+        return  input.nextLine();
     }
 }
 
