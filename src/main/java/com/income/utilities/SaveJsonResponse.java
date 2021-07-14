@@ -1,4 +1,4 @@
-package Utilities;
+package com.income.utilities;
 
 import io.restassured.path.json.JsonPath;
 

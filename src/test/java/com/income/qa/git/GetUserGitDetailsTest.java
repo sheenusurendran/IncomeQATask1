@@ -1,23 +1,20 @@
 package com.income.qa.git;
 
 import static io.restassured.RestAssured.given;
+
 import org.junit.jupiter.api.Test;
 import io.restassured.path.json.JsonPath;
-//import org.junit.Test;
-import org.junit.jupiter.api.Order;
-
-import Utilities.SaveJsonResponse;
-import Utilities.SetupResource;
+import com.income.utilities.*;
 
 public class GetUserGitDetailsTest {
 
-    private static String response;
-    private static String gitUserName = SetupResource.getUserName();
-    private static String basepathUser = SetupResource.path_user + gitUserName;
-    private static String basePathRepo = SetupResource.path_user + gitUserName + SetupResource.path_repo;
-    private static String basePathReleases = null;
-    private static String baseURI = SetupResource.baseURI;
-    private static JsonPath jsn = null;
+    public static String response;
+    public static String gitUserName = SetupResource.getUserName();
+    public static String basepathUser = SetupResource.path_user + gitUserName;
+    public static String basePathRepo = SetupResource.path_user + gitUserName + SetupResource.path_repo;
+    public static String basePathReleases = null;
+    public static String baseURI = SetupResource.baseURI;
+    public static JsonPath jsn = null;
 
 
     @Test
@@ -54,13 +51,13 @@ public class GetUserGitDetailsTest {
             JsonPath jsn1 = SaveJsonResponse.fromRawToJson(getReleases);
             String noofStars = jsn.get("stargazers_count[" + i + "]").toString();
             System.out.println(" Repository " + (i + 1) + " = " + nameofRepo);
-            System.out.println('\u2022' + " " + "Stars = " + noofStars);
+            System.out.println(" " + "Stars = " + noofStars);
             if ((jsn1.get("message").toString().equalsIgnoreCase("Not Found")
                     || jsn1.get("message").toString().equalsIgnoreCase("Git Repository is empty."))) {
-                System.out.println('\u2022' + " " + "Releases = " + 0);
+                System.out.println(" " + "Releases = " + 0);
             } else {
                 responseSize = jsn1.getInt("ref.size()");
-                System.out.println('\u2022' + " " + "Releases = " + responseSize);
+                System.out.println(" " + "Releases = " + responseSize);
             }
 
         }
