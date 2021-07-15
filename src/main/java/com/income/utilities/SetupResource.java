@@ -1,8 +1,5 @@
 package com.income.utilities;
 
-import javax.swing.*;
-import java.util.Scanner;
-
 public class SetupResource {
 
     public static String path_user = "users/";
@@ -11,14 +8,6 @@ public class SetupResource {
     public static String baseURI = "https://api.github.com/";
     public static String userName = " ";
 
-
-    //Scanner class can be used when you have IDE to run
-    /*public static String getUserName() {
-        System.out.println("Enter your git username:");
-        Scanner input = new Scanner(System.in);
-        return  input.nextLine();
-    }*/
-    
 /*Below methods accepts the gitusername via
 command line and need to pass the value via mvn command
  */
