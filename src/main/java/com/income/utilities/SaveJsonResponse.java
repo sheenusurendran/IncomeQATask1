@@ -7,5 +7,4 @@ public class SaveJsonResponse {
         JsonPath jsn = new JsonPath(response);
         return jsn;
     }
-
 }
