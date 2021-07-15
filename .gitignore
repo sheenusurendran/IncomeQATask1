@@ -1,0 +1,11 @@
+# Project exclude paths
+/target/
+
+# idea
+.idea
+
+# ecliplse
+.settings
+.project
+.classpath
+*.iml
