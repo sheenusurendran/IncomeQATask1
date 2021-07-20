@@ -35,16 +35,22 @@ public class GetUserGitDetailsTest {
 
     @Test
     public void displayRepoDetails() {
-
-        JsonPath repositories = null;
+        JsonPath repositories;
+        int noofRepos;
         try {
             repositories = fetchData(basePathRepo);
+            noofRepos = repositories.getInt("name.size()");
+            for (int repoIndex = 0; repoIndex < noofRepos; repoIndex++) {
+                String nameOfRepo = repositories.get("name[" + repoIndex + "]");
+                String noOfStars = repositories.get("stargazers_count[" + repoIndex + "]").toString();
+                JsonPath releases = fetchReleases(nameOfRepo);
+                printRepoDetails(noOfStars, repoIndex, nameOfRepo, releases);
+            }
         } catch (Exception e) {
+            e.getMessage();
             e.printStackTrace();
         }
-        getReleaseDetails(repositories);
     }
-
 
     private JsonPath fetchReleases(String nameofRepo) throws Exception {
         basePathReleases = SetupResource.path_repo + "/" + gitUserName + "/" + nameofRepo
@@ -54,7 +60,7 @@ public class GetUserGitDetailsTest {
         if (releases == null || releases.length() == 0) {
             throw new Exception("No Releases Found");
         }
-        return SaveJsonResponse.fromRawToJson(releases);
+        return ParseJson.fromRawToJson(releases);
     }
 
     private JsonPath fetchData(String getPath) throws Exception {
@@ -64,30 +70,13 @@ public class GetUserGitDetailsTest {
         if (response == null || response.length() == 0) {
             throw new Exception("No Data Found");
         }
-        return SaveJsonResponse.fromRawToJson(response);
+        return ParseJson.fromRawToJson(response);
     }
 
-    private void getReleaseDetails(JsonPath repositories) {
+    private void printRepoDetails(String noOfStars, int repoIndex, String nameOfRepo, JsonPath releases) {
         int responseSize;
-        int noofRepos = repositories.getInt("name.size()");
-
-        for (int i = 0; i < noofRepos; i++) {
-            String nameOfRepo = repositories.get("name[" + i + "]");
-            JsonPath releases = null;
-            try {
-                releases = fetchReleases(nameOfRepo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            printRepoDetails(repositories, i, nameOfRepo, releases);
-        }
-    }
-
-    private void printRepoDetails(JsonPath repositories, int i, String nameOfRepo, JsonPath releases) {
-        int responseSize;
-        String noofStars = repositories.get("stargazers_count[" + i + "]").toString();
-        System.out.println(" Repository " + (i + 1) + " = " + nameOfRepo);
-        System.out.println(" " + "Stars = " + noofStars);
+        System.out.println(" Repository " + (repoIndex + 1) + " = " + nameOfRepo);
+        System.out.println(" " + "Stars = " + noOfStars);
         if ((releases.get("message").toString().equalsIgnoreCase("Not Found")
                 || releases.get("message").toString().equalsIgnoreCase("Git Repository is empty."))) {
             System.out.println(" " + "Releases = " + 0);
