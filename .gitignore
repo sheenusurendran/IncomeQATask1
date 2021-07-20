@@ -3,6 +3,7 @@
 
 # idea
 .idea
+*.DS_Store
 
 # ecliplse
 .settings
