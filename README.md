@@ -7,9 +7,9 @@
     2) Name = Name of the user
     3) Created on = date when user account created
 * And Display below information for each of the repositories owned by this user,
-    1) Repository 1 = name of repository
-    2) Name = name of the user
-    3) Created on = date when user account created
+  1) Repository 1 = name of repository
+  2) Stars = number of stars
+  3) Releases = number of releases
 
 ### Steps to run
 
